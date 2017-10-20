@@ -1,0 +1,52 @@
+{% include "base.html" %}
+
+{% block content %}
+<div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Editar cliente</h4> </div>
+
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!--.row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <form method="post" action="/editar_cliente/{{ cliente.id }}/">
+                                        <div class="form-group">
+                                            <label>Nome</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="nome" value="{{ cliente.nome }}"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Endereço</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="endereco" value=" {{ cliente.endereco }} "></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Telefone</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="telefone" value="{{ cliente.telefone }} "></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <div class="input-group">
+                                                <input type="email" class="form-control" name="email" value="{{ cliente.email }}"></div>
+                                        </div>
+                                        <button type="submit" formaction="/editar_cliente/{{ cliente.id }}/" class="btn btn-success waves-effect waves-light m-r-10">Editar</button>
+                                        <button type="submit" formaction="/remover_cliente/{{ cliente.id }}/" class="btn btn-info waves-effect waves-light m-r-10">Desativar</button>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+{% endblock %}

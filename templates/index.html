@@ -1,0 +1,57 @@
+{% include "base.html" %}
+
+{% block content %}
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Dashboard</h4> </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="white-box">
+                            <a href="/clientes">
+                                <div class="r-icon-stats"> <i class="ti-user bg-megna"></i>
+                                    <div class="bodystate">
+                                        <h4>{{ clientes }}</h4> <span class="text-muted">Clientes</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="white-box">
+                            <a href="/vendas">
+                                <div class="r-icon-stats"> <i class="ti-shopping-cart bg-info"></i>
+                                    <div class="bodystate">
+                                        <h4>{{ vendas }}</h4> <span class="text-muted">Vendas</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="white-box">
+                            <a href="/produtos">
+                                <div class="r-icon-stats"> <i class="fa fa-cubes bg-success"></i>
+                                    <div class="bodystate">
+                                        <h4>{{ produtos }}</h4> <span class="text-muted">Produtos</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="white-box">
+                            <div class="r-icon-stats"> <i class="ti-wallet bg-inverse"></i>
+                                <div class="bodystate">
+                                    <h4>R$ {{ total|sum(attribute='total') }}</h4> <span class="text-muted">Total</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

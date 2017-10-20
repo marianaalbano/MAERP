@@ -1,0 +1,51 @@
+{% include "base.html" %}
+
+{% block content %}
+<div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Novo cliente</h4> </div>
+
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!--.row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Novo cliente</h3>
+                            <p class="text-muted m-b-30 font-13"> Adicionar novo cliente</p>
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <form method="post" action="/novo_cliente/">
+                                        <div class="form-group">
+                                            <label>Nome</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="nome" placeholder="Digite o nome"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Endereço</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="endereco" placeholder="Digite o endereço"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Telefone</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="telefone" placeholder="Digite o telefone"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <div class="input-group">
+                                                <input type="email" class="form-control" name="email" placeholder="Digite o email"> </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Salvar</button>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+{% endblock %}

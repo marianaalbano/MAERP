@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/plugins/images/logo.png">
+    <title>MAERP</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="/static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- morris CSS -->
+    <link href="/static/plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/css/style.min.css" rel="stylesheet">
+                              
+    <!-- color CSS -->
+    <link href="/static/css/colors/megna.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    {% block css %} {% endblock %}
+    {% block js %} {% endblock %}
+<![endif]-->
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="cssload-speeding-wheel"></div>
+    </div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
+                <div class="top-left-part"><a class="logo" href="index.html"><b><img src="/static/plugins/images/logo.png" alt="home" /></b><span class="hidden-xs"><strong>MA</strong>ERP</span></a></div>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- Left navbar-header -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-small-cap m-t-10">--- MENU</li>
+                    <li> <a href="/index" class="waves-effect"><i class="ti-dashboard p-r-10"></i> <span class="hide-menu">Dashboard</span></a> </li>
+                    <li> <a href="/clientes" class="waves-effect"><i class="fa fa-group p-r-10"></i> <span class="hide-menu">Clientes</span></a> </li>
+                    <li> <a href="/vendas" class="waves-effect"><i class="fa fa-shopping-cart p-r-10"></i> <span class="hide-menu">Vendas</span></a> </li>
+                    <li> <a href="#" class="waves-effect"><i class="fa fa-cubes p-r-10"></i> <span class="hide-menu">Produtos</span></a> </li>
+                    <li class="nav-small-cap m-t-10">--- CONTA</li>
+                    <li> <a href="#" class="waves-effect"><i class="fa fa-cogs"></i> <span class="hide-menu">Configurações</span></a> </li>
+                    <li> <a href="/logout" class="waves-effect"><i class="icon-logout fa-fw"></i> <span class="hide-menu">Logout</span></a> </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Left navbar-header end -->
+        <!-- Page Content -->
+
+        {% block content %} {% endblock %}
+
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2017 &copy; Mariana Albano</footer>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="/static/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/bootstrap/dist/js/tether.min.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="/static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="/static/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="/static/js/waves.js"></script>
+    <!--Morris JavaScript -->
+    <script src="/static/plugins/bower_components/raphael/raphael-min.js"></script>
+    <script src="/static/plugins/bower_components/morrisjs/morris.js"></script>
+    <!-- Sparkline chart JavaScript -->
+    <script src="/static/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!-- jQuery peity -->
+    <script src="/static/plugins/bower_components/peity/jquery.peity.min.js"></script>
+    <script src="/static/plugins/bower_components/peity/jquery.peity.init.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/static/js/custom.min.js"></script>
+    <script src="/static/js/dashboard1.js"></script>
+    <!--Style Switcher -->
+    <script src="/static/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+    {% block bottomjs %}
+    {% endblock %}
+</body>
+
+</html>

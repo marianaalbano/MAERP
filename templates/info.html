@@ -1,0 +1,115 @@
+{% include "base.html" %}
+
+
+{% block content %}
+
+<div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Informações</h4> </div>
+
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box printableArea">
+                            <h3>Informações de venda <span class="pull-right">#{{ vendas.id }}</span></h3>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-left"> <address>
+                                            <h3> &nbsp;<b class="text-danger">MAJJI</b></h3>
+                                            <p class="text-muted m-l-5">Avenida Paulista
+                                                <br/> (11) 99999-9999
+                                                <br/> mariana.albano@outlook.com
+                                                <br/></p>
+                                        </address> </div>
+                                    <div class="pull-right text-right"> <address>
+                                            <h4 class="font-bold">{{ vendas.clientes.nome }},</h4>
+                                            <p class="text-muted m-l-30">{{ vendas.clientes.endereco }}
+                                                <br/>{{ vendas.clientes.telefone }}
+                                                <br/> {{ vendas.clientes.email }}
+                                                <br/></p>
+                                            <p class="m-t-30"><b>Data</b> <i class="fa fa-calendar"></i> {{ vendas.data.strftime('%d/%m/%Y') }}</p>
+                                            </address> </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="table-responsive m-t-40" style="clear: both;">>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Produto</th>
+                                                    <th>Quantidade</th>
+                                                    <th class="text-right">Valor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for p in vendas.produtos %}
+                                                <tr>
+                                                    <td>{{ p.id }}</td>
+                                                    <td>{{ p.nome }} </td>
+                                                    <td>2</td>
+                                                    <td class="text-right">R$ {{ p.valor }} </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="pull-right m-t-30 text-right">
+                                        <h3><b>Total:</b> {{ vendas.produtos|sum(attribute='valor') }}</h3> </div>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <div class="text-right">
+                                        <button class="btn btn-linkedin" onclick="history.go(-1)" type="submit"> Voltar </button>
+                                        <button onClick="javascript:window.print();" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Imprimir</span> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.right-sidebar -->
+            </div>
+            <!-- /.container-fluid -->
+            {% endblock %}
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="/static/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/bootstrap/dist/js/tether.min.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="/static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <script src="/static/js/jquery.PrintArea.js" type="text/JavaScript"></script>
+    <script>
+        $(document).ready(function () {
+            $("#print").click(function () {
+                var mode = 'iframe'; //popup
+                var close = mode == "popup";
+                var options = {
+                    mode: mode
+                    , popClose: close
+                };
+                $("div.printableArea").printArea(options);
+            });
+        });
+    </script>
+    <!--slimscroll JavaScript -->
+    <script src="/static/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="/static/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/static/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="/static/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+</body>
+
+</html>
