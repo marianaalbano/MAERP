@@ -39,3 +39,11 @@ class ClientesClass:
             db.session.commit()
         except Exception as e:
             return "Erro: %s" % e
+
+    def ativar_cliente(self, id):
+        try:
+            cliente = Clientes.query.get(id)
+            cliente.ativo = True
+            db.session.commit()
+        except Exception as e:
+            return "Erro: %s" % e

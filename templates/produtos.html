@@ -1,0 +1,218 @@
+{% include "base.html" %}
+
+{% block css %}
+    <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css" rel="stylesheet">
+    <link href="/static/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- Menu CSS -->
+    <link href="/static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/css/style.min.css" rel="stylesheet">
+
+    <!-- color CSS -->
+    <link href="/static/css/colors/megna.css" id="theme" rel="stylesheet">
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Produtos</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="/novo_produto/" class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Novo Produto</a>
+
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                      {% include 'alert.html' %}
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0">Lista de produtos</h3>
+                        <p class="text-muted m-b-30"></p>
+                        <div class="table-responsive">
+                            <ul class="nav customtab nav-tabs" role="tablist">
+                                <li role="presentation" class="nav-item"><a href="#ativos" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> Ativos</span></a></li>
+                                <li role="presentation" class="nav-item"><a href="#inativos" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Inativos</span></a></li>                                
+                            </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="ativos">
+
+                                        <table id="myTableAtivos" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Produto</th>
+                                                    <th>Valor</th>
+                                                    <th>Opções</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for p in produtos %}
+                                            {% if p.ativo|int() == 1 %}
+                                                <tr>
+                                                    <td>{{ p.id }}</td>
+                                                    <td>{{ p.nome }}</td>
+                                                    <td>{{ p.valor }}</td>
+                                                    <td>
+                                                        <form action="/editar_produto/{{ p.id }}/">
+                                                            <button class="btn btn-success btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Editar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="inativos">
+                                        
+                                        <table id="myTableInativos" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Produto</th>
+                                                    <th>Valor</th>
+                                                    <th>Opções</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for p in produtos %}
+                                            {% if p.ativo|int() == 0 %}
+                                                <tr>
+                                                    <td>{{ p.id }}</td>
+                                                    <td>{{ p.nome }}</td>
+                                                    <td>{{ p.valor }}</td>
+                                                    <td>
+                                                        <form action="/editar_produto/{{ p.id }}/">
+                                                            <button class="btn btn-success btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Editar</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block bottomjs %}
+<script src="/static/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/bootstrap/dist/js/tether.min.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="/static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="/static/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="/static/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/static/js/custom.min.js"></script>
+    <script src="/static/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <!-- end - This is for export functionality only -->
+    <script>
+        $(document).ready(function () {
+            $('#myTableAtivos').DataTable();
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    "columnDefs": [
+                        {
+                            "visible": false
+                            , "targets": 2
+                        }
+          ]
+                    , "order": [[2, 'asc']]
+                    , "displayLength": 25
+                    , "drawCallback": function (settings) {
+                        var api = this.api();
+                        var rows = api.rows({
+                            page: 'current'
+                        }).nodes();
+                        var last = null;
+                        api.column(2, {
+                            page: 'current'
+                        }).data().each(function (group, i) {
+                            if (last !== group) {
+                                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                                last = group;
+                            }
+                        });
+                    }
+                });
+                // Order by the grouping
+                $('#example tbody').on('click', 'tr.group', function () {
+                    var currentOrder = table.order()[0];
+                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                        table.order([2, 'desc']).draw();
+                    }
+                    else {
+                        table.order([2, 'asc']).draw();
+                    }
+                });
+            });
+            $('#myTableInativos').DataTable();
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    "columnDefs": [
+                        {
+                            "visible": false
+                            , "targets": 2
+                        }
+          ]
+                    , "order": [[2, 'asc']]
+                    , "displayLength": 25
+                    , "drawCallback": function (settings) {
+                        var api = this.api();
+                        var rows = api.rows({
+                            page: 'current'
+                        }).nodes();
+                        var last = null;
+                        api.column(2, {
+                            page: 'current'
+                        }).data().each(function (group, i) {
+                            if (last !== group) {
+                                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                                last = group;
+                            }
+                        });
+                    }
+                });
+                // Order by the grouping
+                $('#example tbody').on('click', 'tr.group', function () {
+                    var currentOrder = table.order()[0];
+                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                        table.order([2, 'desc']).draw();
+                    }
+                    else {
+                        table.order([2, 'asc']).draw();
+                    }
+                });
+            });
+        });
+       
+    </script>
+
+{% endblock %}

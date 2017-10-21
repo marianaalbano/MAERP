@@ -3,6 +3,7 @@ from flask_login import LoginManager, login_required, login_user, logout_user
 from Model.Model import Clientes, Vendas, Produtos, db, app
 from Blueprints.Vendas import vendas
 from Blueprints.Clientes import clientes
+from Blueprints.Produtos import produtos
 from Classes.Usuario import Usuario
 from datetime import timedelta
 
@@ -13,9 +14,10 @@ login_manager = LoginManager()
 
 app.register_blueprint(vendas)
 app.register_blueprint(clientes)
+app.register_blueprint(produtos)
 
 
-#app.permanent_session_lifetime = timedelta(seconds=3600)
+app.permanent_session_lifetime = timedelta(seconds=3600)
 
 login_manager = LoginManager(app)
 login_manager.init_app(app)

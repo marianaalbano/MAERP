@@ -12,7 +12,6 @@ clientes = Blueprint('clientes', __name__)
 def lista_clientes():
         clientes = ClientesClass()
         lista = clientes.listar_clientes()
-        print lista[0].ativo
         return render_template('clientes.html', clientes=lista)
 
 @clientes.route("/novo_cliente/", methods=['GET', 'POST'])
@@ -50,14 +49,31 @@ def editar_cliente(id):
         return render_template('editar_cliente.html', cliente=info)
 
 
-@clientes.route("/remover_cliente/<id>/", methods=['POST'])
+@clientes.route("/desativar_cliente/<id>/", methods=['POST'])
 @login_required
-def remover_cliente(id):
+def desativar_cliente(id):
     cliente = ClientesClass()
     if request.method == 'POST':
         try:
             cliente.desativar_cliente(id)
-            flash('Cliente removido com sucesso!', 'success')
+            flash('Cliente desativado com sucesso!', 'success')
+            return redirect(url_for('.lista_clientes'))
+        except Exception as e:
+            flash('Falha ao remover: %s' %e, 'danger')
+            return redirect(url_for('.lista_clientes'))
+    else:
+        cliente = cliente.filtrar_cliente(id)
+        return render_template('editar_cliente.html', cliente=cliente)
+
+
+@clientes.route("/ativar_cliente/<id>/", methods=['POST'])
+@login_required
+def ativar_cliente(id):
+    cliente = ClientesClass()
+    if request.method == 'POST':
+        try:
+            cliente.ativar_cliente(id)
+            flash('Cliente ativado com sucesso!', 'success')
             return redirect(url_for('.lista_clientes'))
         except Exception as e:
             flash('Falha ao remover: %s' %e, 'danger')
