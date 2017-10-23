@@ -1,0 +1,107 @@
+{% include "base.html" %}
+
+{% block content %}
+<div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Novo cliente</h4> 
+                    </div>
+
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!--.row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Novo cliente</h3>
+                            <p class="text-muted m-b-30 font-13"> Adicionar novo cliente</p>
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                        <form method="post" action="/novo_produto/">
+                                            <div class="form-group">
+                                                    <label>Cliente</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="cliente" placeholder="Nome do cliente"> </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-7">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Nome do produto</label>
+                                                        <input maxlength="200" type="text" class="form-control" placeholder="Adicionar " name="nome[]" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Quantidade</label>
+                                                            <input maxlength="200" type="text" class="form-control" placeholder="Enter Modem Serial Number" name="quantidade[]" />
+                                                        </div>
+                                                    </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group change">
+                                                        <label for="">&nbsp;</label><br/>
+                                                        <a class="btn btn-success add-more">+</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <table id="myTable" class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Produto</th>
+                                                            <th>Quantidade</th>
+                                                            <th>Valor</th>
+                                                            <th>Remover</th>
+                    
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="after-add-more">
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            <div>
+                                        
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+{% endblock %}
+
+{% block bottomjs %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("body").on("click",".add-more",function(){ 
+            var html = $(".after-add-more").first().clone();          
+              $(html).find(".change").html("<td></td>");
+          
+          
+            $(".after-add-more").last().after(html);
+          
+         
+           
+        });
+    
+        $("body").on("click",".remove",function(){ 
+            $(this).parents(".after-add-more").remove();
+        });
+    });
+    </script>
+
+{% endblock %}

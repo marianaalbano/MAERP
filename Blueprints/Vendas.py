@@ -53,7 +53,7 @@ def info():
             return redirect(url_for('.listar_vendas'))
 
 
-@vendas.route("/new_sale/", methods=['GET', 'POST'])
+@vendas.route("/nova_venda/", methods=['GET', 'POST'])
 @login_required
 def nova_venda():
-    return render_template('new_sale.html')
+    return render_template('nova_venda.html')
