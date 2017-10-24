@@ -11,40 +11,96 @@
                 </div>
                 <!--.row-->
                 <div class="row">
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <select name="from[]" id="example" class="form-control" size="8" multiple="multiple">
-                                <option value="1">Item 1</option>
-                                <option value="3">Item 3</option>
-                                <option value="2">Item 2</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-xs-2">
-                            <button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
-                            <button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
-                            <button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
-                            <button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
-                        </div>
-                        
-                        <div class="col-xs-5">
-                            <select name="to[]" id="multiselect_to" class="form-control" size="8" multiple="multiple"></select>
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Novo cliente</h3>
+                            <p class="text-muted m-b-30 font-13"> Adicionar novo cliente</p>
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                        <form method="post" action="/novo_produto/">
+                                            <div class="form-group">
+                                                    <label>Cliente</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="cliente" placeholder="Nome do cliente"> </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-7">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Nome do produto</label>
+                                                        <input maxlength="200" type="text" class="form-control" placeholder="Adicionar " name="nome[]" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Quantidade</label>
+                                                            <input maxlength="200" type="text" class="form-control" placeholder="Enter Modem Serial Number" name="quantidade[]" />
+                                                        </div>
+                                                    </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group change">
+                                                        <label for="">&nbsp;</label><br/>
+                                                        <a class="btn btn-success add-more">+</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <table id="myTable" class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Produto</th>
+                                                            <th>Quantidade</th>
+                                                            <th>Valor</th>
+                                                            <th>Remover</th>
+                    
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="after-add-more">
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            <div>
+                                        
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-
                 </div>
             </div>
 </div>
 
 {% endblock %}
+
 {% block bottomjs %}
-    <!-- <script type="text/javascript" src="path/to/jquery.min.js"></script>
-    <script type="text/javascript" src="path/to/multiselect.min.js"></script>
-     -->
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("#example").multiselect();
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("body").on("click",".add-more",function(){ 
+            var html = $(".after-add-more").first().clone();          
+              $(html).find(".change").html("<td></td>");
+          
+          
+            $(".after-add-more").last().after(html);
+          
+         
+           
         });
+    
+        $("body").on("click",".remove",function(){ 
+            $(this).parents(".after-add-more").remove();
+        });
+    });
     </script>
-  {% endblock %}
+
+{% endblock %}
