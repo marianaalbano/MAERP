@@ -86,7 +86,8 @@ class Vendas(db.Model):
 
 
 if __name__ == '__main__':
-    #manager.run()
+    manager.run()
+    '''
     produto2 = Produtos.query.get(2)
     produto = Produtos.query.get(1)
     cliente = Clientes.query.get(1)
@@ -99,3 +100,4 @@ if __name__ == '__main__':
     db.session.add(v)
     db.session.commit()
     print 'foi'
+    '''

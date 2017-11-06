@@ -58,10 +58,13 @@ def info():
 def nova_venda():
     if request.method == 'POST':
         try:
+            dados = request.get_json()
             venda = VendasClass()
-            venda.adicionar_venda(request.form)
-            return render_template('nova_venda.html')
+            venda.adicionar_venda(dados)
+            flash('Venda adicionado com sucesso!', 'success')
+            return redirect(url_for('.listar_vendas'))
         except Exception as e:
-            return render_template('nova_venda.html')
+            flash('Falha ao inserir: %s' %e, 'danger')
+            return redirect(url_for('.listar_vendas'))
     else:
         return render_template('nova_venda.html')

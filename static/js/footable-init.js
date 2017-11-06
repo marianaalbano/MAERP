@@ -67,7 +67,8 @@ $(window).on('load', function() {
 		footable.removeRow(row);
 	});
 	// Add Row Button
-	$('#demo-btn-addrow').click(function() {
+	$('#demo-btn-addrow').last().click(function() {
+		var produto_id = $("#produto_id").val();
 		var produto = $("#produto").val();
 		var quantidade = $("#quantidade").val();
 		var valor = $("#valor").val();
@@ -81,7 +82,7 @@ $(window).on('load', function() {
 		var total = n1 * n2;
 
 		//build up the row we are wanting to add
-		var newRow = '<tr><td>'+produto+'</td><td>'+quantidade+'</td><td>'+valor+'</td><td>'+total+'</td><td><button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></td></tr>';
+		var newRow = '<tr><td>'+produto_id+'</td><td>'+produto+'</td><td>'+quantidade+'</td><td>'+valor+'</td><td>'+total+'</td><td><button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></td></tr>';
 
 
 		//add it

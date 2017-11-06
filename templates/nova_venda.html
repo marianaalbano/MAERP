@@ -1,6 +1,8 @@
 {% include "base.html" %}
 
 {% block content %}
+<meta charset="UTF-8">
+
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -11,7 +13,7 @@
             <!-- /.col-lg-12 -->
         </div>
         <!--.row-->
-        <form method="post" action="/nova_venda/">            
+        <form>            
         <div class="row">
             <div class="col-md-12">
                 <div class="white-box">
@@ -78,11 +80,12 @@
                         <table id="demo-foo-addrow" class="table table-bordered table-hover toggle-circle" data-page-size="7">
                             <thead>
                                 <tr>
-                                    <th data-sort-initial="true" data-toggle="true">Produto</th>
-                                    <th>Quantidade</th>
-                                    <th>Valor</th>
-                                    <th id='total'>Total</th>
-                                    <th >Remover</th>
+                                    <th>ID</th>
+                                    <th data-sort-initial="true" data-toggle="true">produto</th>
+                                    <th>quantidade</th>
+                                    <th>valor</th>
+                                    <th id='total'>total</th>
+                                    <th >remover</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,7 +100,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Salvar</button>
+                        <button type="submit" id="convert-table" class="btn btn-success waves-effect waves-light m-r-10">Salvar</button>
                     </div>
                 </div>
             </div>
@@ -118,6 +121,7 @@
 <!--FooTable init-->
 <script src="/static/js/footable-init.js"></script>
 <script src="/static/bootstrap/js/typeahead.js"></script>
+<script src="/static/js/tabletojson.js"></script>
 
 <script>
         // Date Picker
@@ -140,38 +144,31 @@
 
             });
     </script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        // Sonstructs the suggestion engine
-        var countries = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.whitespace,
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            // The url points to a json file that contains an array of country names
-            prefetch: '/api/clientes/'
-        });
-        
-        // Initializing the typeahead with remote dataset without highlighting
-        $('.clientes').typeahead(null, {
-            name: 'countries',
-            source: countries,
-            limit: 10 /* Specify max number of suggestions to be displayed */
-        });
-    });  
-    </script> 
-<!--  
 <script>
-    (function() {
-        var URL = "/api/clientes/";
-        $.getJSON( URL, {
-          format: "json"
-        })
-          .done(function( data ) {
-            $.each( data.items, function( i, item ) {
-              $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
-              if ( i === 3 ) {
-                return false;
-              }
-            });
-          });
-      })();
-</script> -->
+    $('#convert-table').click( function() {
+		var table = $('#demo-foo-addrow').tableToJSON(); // Convert the table into a javascript object
+		//console.log(table);
+		//alert(JSON.stringify(table));
+      
+        var cliente_id = $("#cliente_id").val();
+		var cliente = $("#cliente").val();
+		var data = $("#data").val();
+
+        var xhr = new XMLHttpRequest();
+        var url = "/nova_venda/";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.parse(xhr.responseText);
+                //console.log(json.email + ", " + json.password);
+            }
+        };
+        var data = JSON.stringify({'cliente_id':cliente_id,
+                                   'cliente':cliente,
+                                   'data':data,
+                                   'produtos':table});
+        xhr.send(data);
+        });
+
+</script>
