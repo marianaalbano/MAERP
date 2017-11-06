@@ -56,4 +56,12 @@ def info():
 @vendas.route("/nova_venda/", methods=['GET', 'POST'])
 @login_required
 def nova_venda():
-    return render_template('nova_venda.html')
+    if request.method == 'POST':
+        try:
+            venda = VendasClass()
+            venda.adicionar_venda(request.form)
+            return render_template('nova_venda.html')
+        except Exception as e:
+            return render_template('nova_venda.html')
+    else:
+        return render_template('nova_venda.html')

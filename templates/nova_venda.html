@@ -2,105 +2,176 @@
 
 {% block content %}
 <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row bg-title">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Nova venda</h4> </div>
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Nova venda</h4> 
+            </div>
 
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!--.row-->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="white-box">
-                            <h3 class="box-title m-b-0">Novo cliente</h3>
-                            <p class="text-muted m-b-30 font-13"> Adicionar novo cliente</p>
-                            <div class="row">
-                                <div class="col-sm-12 col-xs-12">
-                                        <form method="post" action="/novo_produto/">
-                                            <div class="form-group">
-                                                    <label>Cliente</label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" name="cliente" placeholder="Nome do cliente"> </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-7">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Nome do produto</label>
-                                                        <input maxlength="200" type="text" class="form-control" placeholder="Adicionar " name="nome[]" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Quantidade</label>
-                                                            <input maxlength="200" type="text" class="form-control" placeholder="Enter Modem Serial Number" name="quantidade[]" />
-                                                        </div>
-                                                    </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group change">
-                                                        <label for="">&nbsp;</label><br/>
-                                                        <a class="btn btn-success add-more">+</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <table id="myTable" class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Produto</th>
-                                                            <th>Quantidade</th>
-                                                            <th>Valor</th>
-                                                            <th>Remover</th>
-                    
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr class="after-add-more">
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            <div>
-                                        
-                                        </form>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!--.row-->
+        <form method="post" action="/nova_venda/">            
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <h3 class="box-title m-b-0">Nova venda</h3>
+                    <p class="text-muted m-b-30 font-13"> Adicionar nova venda</p>
+                    <div class="row">
+                        <div class="col-lg-1">                                            
+                            <label>ID</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cliente_id" name="cliente_id" placeholder="ID"> 
+                            </div>
+                        </div>
+                        <div class="col-lg-7">                                            
+                            <label>Cliente</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cliente" name="cliente" placeholder="Digite o nome do cliente"> 
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                                    <label>Data</label>
+                                    <div class="input-group">
+                                        <input type="text" name="data" class="form-control mydatepicker" placeholder="dd/mm/yyyy"> <span class="input-group-addon"><i class="icon-calender"></i></span>
                                     </div>
+                        </div>
+                        <div class="col-lg-1">
+                                <label class="m-t-20">ID</label>
+                                <div class="input-group">
+                                    <input type="text" name="produto_id" id="produto_id" class="form-control" placeholder="ID">
                                 </div>
                             </div>
+                        <div class="col-lg-6">
+                            <label class="m-t-20">Produto</label>
+                            <div class="input-group">
+                                <input type="text" name="produto" id="produto" class="form-control" placeholder="Digite o produto">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <label class="m-t-20">Quantidade</label>
+                            <div class="input-group">
+                                <input type="text" name="quantidade" id="quantidade" class="form-control" value="1">
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <label class="m-t-20">Valor</label>
+                            <div class="input-group">
+                                <input type="text" name="valor" id="valor" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                                <label class="m-t-20">Adicionar</label>
+                                <div class="input-group">
+                                    <button type='button' id="demo-btn-addrow" class="btn btn-success"><i class="icon wb-plus" aria-hidden="true"></i>Adicionar</button>
+                                </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0">Produtos</h3>
+                        <p class="text-muted m-b-20">Produtos selecionados para venda </p>
+                        <table id="demo-foo-addrow" class="table table-bordered table-hover toggle-circle" data-page-size="7">
+                            <thead>
+                                <tr>
+                                    <th data-sort-initial="true" data-toggle="true">Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor</th>
+                                    <th id='total'>Total</th>
+                                    <th >Remover</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="text-right">
+                                            <ul class="pagination"> </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Salvar</button>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
 </div>
 
 {% endblock %}
+<script src="/static/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="/static/plugins/bower_components/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
+<script src="/static/plugins/bower_components/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
+<script src="/static/plugins/bower_components/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js"></script>
+<link href="/static/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+<!-- Footable -->
+<script src="/static/plugins/bower_components/footable/js/footable.all.min.js"></script>
+<script src="/static/plugins/bower_components/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+<!--FooTable init-->
+<script src="/static/js/footable-init.js"></script>
+<script src="/static/bootstrap/js/typeahead.js"></script>
 
-{% block bottomjs %}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+        // Date Picker
+        jQuery('.mydatepicker, #datepicker').datepicker();
+            jQuery('.mydatepicker, #datepicker').datepicker({
+                autoclose: true
+                , zIndexOffset: '1001'
+                , todayHighlight: true
+                , orientation: 'bottom'
 
+            });
+            jQuery('#date-range').datepicker({
+                toggleActive: true
+                ,     orientation: 'bottom'
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("body").on("click",".add-more",function(){ 
-            var html = $(".after-add-more").first().clone();          
-              $(html).find(".change").html("<td></td>");
-          
-          
-            $(".after-add-more").last().after(html);
-          
-         
-           
-        });
-    
-        $("body").on("click",".remove",function(){ 
-            $(this).parents(".after-add-more").remove();
-        });
-    });
+            });
+            jQuery('#datepicker-inline').datepicker({
+                todayHighlight: true
+                ,    orientation: 'bottom'
+
+            });
     </script>
-
-{% endblock %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Sonstructs the suggestion engine
+        var countries = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.whitespace,
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            // The url points to a json file that contains an array of country names
+            prefetch: '/api/clientes/'
+        });
+        
+        // Initializing the typeahead with remote dataset without highlighting
+        $('.clientes').typeahead(null, {
+            name: 'countries',
+            source: countries,
+            limit: 10 /* Specify max number of suggestions to be displayed */
+        });
+    });  
+    </script> 
+<!--  
+<script>
+    (function() {
+        var URL = "/api/clientes/";
+        $.getJSON( URL, {
+          format: "json"
+        })
+          .done(function( data ) {
+            $.each( data.items, function( i, item ) {
+              $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+              if ( i === 3 ) {
+                return false;
+              }
+            });
+          });
+      })();
+</script> -->

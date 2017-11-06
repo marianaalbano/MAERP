@@ -68,14 +68,24 @@ $(window).on('load', function() {
 	});
 	// Add Row Button
 	$('#demo-btn-addrow').click(function() {
+		var produto = $("#produto").val();
+		var quantidade = $("#quantidade").val();
+		var valor = $("#valor").val();
 
 		//get the footable object
 		var footable = addrow.data('footable');
 		
+		/// Somar os valores
+		var n1 = parseFloat(document.getElementById('quantidade').value, 10);
+		var n2 = parseFloat(document.getElementById('valor').value, 10);
+		var total = n1 * n2;
+
 		//build up the row we are wanting to add
-		var newRow = '<tr><td>thome</td><td>Woldt</td><td>Airline Transport Pilot</td><td>3 Oct 2016</td><td><span class="label label-table label-success">Active</span></td><td><button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></td></tr>';
+		var newRow = '<tr><td>'+produto+'</td><td>'+quantidade+'</td><td>'+valor+'</td><td>'+total+'</td><td><button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></td></tr>';
+
 
 		//add it
 		footable.appendRow(newRow);
 	});
+
 });

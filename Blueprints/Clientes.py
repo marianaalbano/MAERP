@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for, Response, flash
+from flask import Blueprint, render_template, request, redirect, url_for, Response, flash, jsonify
 from flask_login import login_required
 from Model.Model import Clientes, db
 from Classes.ClienteClass import ClientesClass
+import json
 
 clientes = Blueprint('clientes', __name__)
 
@@ -81,3 +82,16 @@ def ativar_cliente(id):
     else:
         cliente = cliente.filtrar_cliente(id)
         return render_template('editar_cliente.html', cliente=cliente)
+
+
+
+
+@clientes.route("/api/clientes/")
+@login_required
+def api_clientes():
+    c = ClientesClass()
+    clientes = c.listar_clientes()
+    lista = []
+    for cliente in clientes:
+        lista.append({"id":cliente.id,"nome":cliente.nome})
+    return jsonify(lista)

@@ -86,4 +86,16 @@ class Vendas(db.Model):
 
 
 if __name__ == '__main__':
-    manager.run()
+    #manager.run()
+    produto2 = Produtos.query.get(2)
+    produto = Produtos.query.get(1)
+    cliente = Clientes.query.get(1)
+    v = Vendas()
+    v.descricao = 'teste'
+    v.total = 1500
+    cliente.vendas.append(v)
+    v.produtos.append(produto)
+    v.produtos.append(produto2)
+    db.session.add(v)
+    db.session.commit()
+    print 'foi'
