@@ -19,10 +19,6 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 
-vendas_produtos = db.Table('vendas_produtos',
-                           db.Column('venda_id',db.Integer, db.ForeignKey('vendas.id')),
-                           db.Column('produto_id',db.Integer, db.ForeignKey('produtos.id')))
-
 class Usuarios(db.Model):
     __tablename__ = 'usuarios'
 
@@ -76,9 +72,17 @@ class Vendas(db.Model):
     total = db.Column(db.Integer, nullable=False)
     clientes = db.relationship("Clientes")
     clientes_id = db.Column(db.Integer, db.ForeignKey("clientes.id"))
-    produtos = db.relationship('Produtos', secondary=vendas_produtos)
+    #produtos = db.relationship('Produtos')
 
 
+class VendasProdutos(db.Model):
+    __tablename__ = 'vendas_produtos'
+    id = db.Column(db.Integer, primary_key=True)
+    vendas_id = db.Column(db.Integer, db.ForeignKey("vendas.id"))
+    produtos_id = db.Column(db.Integer, db.ForeignKey("produtos.id"))
+    quantidade = db.Column(db.Integer)
+    vendas = db.relationship('Vendas')
+    produtos = db.relationship('Produtos')
 
 
 
@@ -87,17 +91,6 @@ class Vendas(db.Model):
 
 if __name__ == '__main__':
     manager.run()
-    '''
-    produto2 = Produtos.query.get(2)
-    produto = Produtos.query.get(1)
-    cliente = Clientes.query.get(1)
-    v = Vendas()
-    v.descricao = 'teste'
-    v.total = 1500
-    cliente.vendas.append(v)
-    v.produtos.append(produto)
-    v.produtos.append(produto2)
-    db.session.add(v)
-    db.session.commit()
-    print 'foi'
-    '''
+   # vendas = Vendas.query.get(18)
+   # print vendas.produtos
+

@@ -54,6 +54,7 @@ def upgrade():
     op.create_table('vendas_produtos',
     sa.Column('venda_id', sa.Integer(), nullable=True),
     sa.Column('produto_id', sa.Integer(), nullable=True),
+    sa.Column('quantidade', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['produto_id'], ['produtos.id'], ),
     sa.ForeignKeyConstraint(['venda_id'], ['vendas.id'], )
     )

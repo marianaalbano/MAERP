@@ -61,10 +61,10 @@ def nova_venda():
             dados = request.get_json()
             venda = VendasClass()
             venda.adicionar_venda(dados)
-            flash('Venda adicionado com sucesso!', 'success')
-            return redirect(url_for('.listar_vendas'))
+            flash('Venda adicionada com sucesso!', 'success')
+            return redirect(url_for('.nova_venda'))
         except Exception as e:
             flash('Falha ao inserir: %s' %e, 'danger')
-            return redirect(url_for('.listar_vendas'))
+            return redirect(url_for('.nova_venda'))
     else:
         return render_template('nova_venda.html')

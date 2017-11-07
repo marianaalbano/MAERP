@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, Response
-from Model.Model import db, Vendas, Clientes
+from Model.Model import db, Vendas, Clientes, VendaProdutos
 from ClienteClass import ClientesClass
 from ProdutosClass import ProdutosClass
 
@@ -17,24 +17,24 @@ class VendasClass:
     def adicionar_venda(self, info):
         try:
             del(info['produtos'][-1])
-            venda = Vendas()
-            clientes = Clientes()
-            cliente = ClientesClass()
+            vp = VendaProdutos()
+            v = Vendas()
+            c = ClientesClass()
+            cliente = Clientes()
             produto = ProdutosClass()
-            cliente = cliente.filtrar_cliente(info.get('cliente_id'))
-            print cliente.nome
-            print info['produtos']
+            cliente = c.filtrar_cliente(info.get('cliente_id'))
             total = 0
             for prod in info['produtos']:
                 total += int(prod.get('total'))
                 p = produto.filtrar_produto(prod.get('ID'))
-                print p.nome
-                venda.produtos.append(p)
-            venda.total = total
-            venda.descricao = 'teste'
-            venda.data = info.get('data')
-            clientes.vendas.append(venda)
-            db.session.add(venda)
+                vp.produtos.append(p)
+            v.total = total
+            v.descricao = 'teste'
+            v.data = info.get('data')
+            vp = info.get('quantidade')
+            cliente.vendas.append(vp)
+            vp.vendas.append(v)
+            db.session.add(v)
             db.session.commit()
         except Exception as e:
             print 'erro: %s' %e
