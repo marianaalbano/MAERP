@@ -1,41 +1,67 @@
 from flask import Blueprint, render_template, request, redirect, url_for, Response
-from Model.Model import db, Vendas, Clientes, VendaProdutos
+from Model.Model import db, Vendas, Clientes
 from ClienteClass import ClientesClass
 from ProdutosClass import ProdutosClass
+from sqlalchemy import distinct
+
 
 
 class VendasClass:
 
     def listar_vendas(self):
-        return Vendas.query.order_by("data")
-
+        query = db.session.query(Vendas.id_venda.distinct())
+        vendas = []
+        for venda in query:
+            unica = Vendas.query.get(venda)
+            vendas.append(unica)
+        return vendas
 
     def filtrar_venda(self, id):
         return Vendas.query.get(id)
 
+    def buscar_info(self,id):
+        return Vendas.query.filter_by(id_venda=id).order_by(Vendas.id.desc()).all()
 
     def adicionar_venda(self, info):
         try:
-            del(info['produtos'][-1])
-            vp = VendaProdutos()
-            v = Vendas()
-            c = ClientesClass()
-            cliente = Clientes()
-            produto = ProdutosClass()
-            cliente = c.filtrar_cliente(info.get('cliente_id'))
-            total = 0
+            #busca o ultimo ID
+            venda_id = Vendas.query.order_by(Vendas.id.desc()).first()
+            venda_id = venda_id.id + 1
+
+            p = ProdutosClass()
+            
             for prod in info['produtos']:
+                print venda_id
+                print prod.get('quantidade')
+                del(info['produtos'][-1])
+                print info
+                v = Vendas()
+                if info.get('data'):
+                    v.data = info.get('data')
+
+                    print v.data
+
+                #encontra o cliente
+                c = ClientesClass()
+                cliente = c.filtrar_cliente(info.get('cliente_id'))
+                print cliente.nome
+                cliente.vendas.append(v)
+
+                total = 0
+                #encontra os produtos
+                produto = p.filtrar_produto(prod.get('ID'))
+                v.quantidade = prod.get('quantidade')
                 total += int(prod.get('total'))
-                p = produto.filtrar_produto(prod.get('ID'))
-                vp.produtos.append(p)
-            v.total = total
-            v.descricao = 'teste'
-            v.data = info.get('data')
-            vp = info.get('quantidade')
-            cliente.vendas.append(vp)
-            vp.vendas.append(v)
-            db.session.add(v)
-            db.session.commit()
+                produto.vendas.append(v)
+                print produto.nome
+
+                print total
+
+                v.total = total
+                v.id_venda = venda_id
+                db.session.add(v)
+                db.session.commit()
+
         except Exception as e:
             print 'erro: %s' %e
 

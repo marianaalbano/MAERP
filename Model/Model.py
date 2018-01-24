@@ -11,7 +11,8 @@ from datetime import datetime
 app = Flask(__name__,static_folder='../static', template_folder='../templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../banco.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, session_options={"autoflush": False})
+
 
 migrate = Migrate(app, db)
 
@@ -51,7 +52,7 @@ class Clientes(db.Model):
     endereco = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     ativo = db.Column(db.String, default=True)
-    vendas = db.relationship("Vendas")
+    vendas = db.relationship("Vendas", backref='clientes')
 
 
 class Produtos(db.Model):
@@ -60,6 +61,7 @@ class Produtos(db.Model):
     nome = db.Column(db.String,  nullable=False)
     valor = db.Column(db.Integer, nullable=False)
     ativo = db.Column(db.String, default=True)
+    vendas = db.relationship("Vendas", backref='produtos')
 
 
 
@@ -67,30 +69,26 @@ class Vendas(db.Model):
     __tablename__ = 'vendas'
 
     id = db.Column(db.Integer, primary_key=True)
+    id_venda = db.Column(db.Integer, nullable=False)
     data = db.Column(db.DateTime, default=datetime.now())
-    descricao = db.Column(db.String, nullable=False)
-    total = db.Column(db.Integer, nullable=False)
-    clientes = db.relationship("Clientes")
-    clientes_id = db.Column(db.Integer, db.ForeignKey("clientes.id"))
-    #produtos = db.relationship('Produtos')
-
-
-class VendasProdutos(db.Model):
-    __tablename__ = 'vendas_produtos'
-    id = db.Column(db.Integer, primary_key=True)
-    vendas_id = db.Column(db.Integer, db.ForeignKey("vendas.id"))
-    produtos_id = db.Column(db.Integer, db.ForeignKey("produtos.id"))
     quantidade = db.Column(db.Integer)
-    vendas = db.relationship('Vendas')
-    produtos = db.relationship('Produtos')
-
-
-
-
+    clientes_id = db.Column(db.Integer, db.ForeignKey("clientes.id"))
+    produtos_id = db.Column(db.Integer, db.ForeignKey("produtos.id"))
+    cliente = db.relationship("Clientes")
+    produto = db.relationship("Produtos")
 
 
 if __name__ == '__main__':
     manager.run()
-   # vendas = Vendas.query.get(18)
-   # print vendas.produtos
-
+    # cliente = Clientes.query.get(1)
+    # produtos = Produtos.query.get(1)   
+    # print cliente.nome
+    # print produtos.nome
+    # vendas = Vendas()
+    # vendas.total = 5
+    # vendas.quantidade = 5
+    # vendas.id_venda = 1
+    # cliente.vendas.append(vendas)
+    # produtos.vendas.append(vendas)
+    # db.session.add(vendas)
+    # db.session.commit()

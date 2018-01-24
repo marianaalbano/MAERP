@@ -46,8 +46,11 @@ def info():
     if request.method == 'POST':
         try:
             id = request.form.get('id')
-            vendas = vendas.filtrar_venda(id)
-            return render_template('info.html', vendas=vendas)
+            vendas = vendas.buscar_info(id)
+            total = 0
+            for venda in vendas:
+                total += venda.quantidade * venda.produto.valor
+            return render_template('info.html', vendas=vendas, total=total)
         except Exception as e:
             flash('Falha ao gerar informações: %s' % e, 'danger')
             return redirect(url_for('.listar_vendas'))

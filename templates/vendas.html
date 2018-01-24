@@ -42,7 +42,6 @@
                                         <th>#</th>
                                         <th>Cliente</th>
                                         <th>Data</th>
-                                        <th>Valor</th>
                                         <th>Nota Fiscal</th>
                                         <th>Informações</th>
 
@@ -54,7 +53,6 @@
                                         <td>{{ v.id }}</td>
                                         <td>{{ v.clientes.nome }}</td>
                                         <td>{{ v.data.strftime('%d-%m-%Y') }}</td>
-                                        <td>{{ v.produtos|sum(attribute='valor') }}</td>
                                         <td>
                                             <form method="post" action="/pdf/">
                                                 <button class="btn btn-googleplus waves-effect waves-light btn-sm" name="id" value="{{ v.id }}"><i class="fa fa-file-pdf-o"></i> PDF</button>

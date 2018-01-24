@@ -5,6 +5,9 @@ from Blueprints.Vendas import vendas
 from Blueprints.Clientes import clientes
 from Blueprints.Produtos import produtos
 from Classes.Usuario import Usuario
+from Classes.VendasClass import VendasClass
+from Classes.ProdutosClass import ProdutosClass
+from Classes.ClienteClass import ClientesClass
 from datetime import timedelta
 
 #app = Flask(__name__)
@@ -73,12 +76,26 @@ def logout():
 @login_required
 def index():
     session.permanent = True
-    clientes = db.session.query(Clientes).count()
-    vendas = db.session.query(Vendas).count()
-    produtos = db.session.query(Produtos).count()
+    vendas = VendasClass()
+    qtd_vendas = vendas.listar_vendas()
+
+    clientes = ClientesClass()
+    qtd_clientes = clientes.listar_clientes()
+
+    produtos = ProdutosClass()
+    qtd_produtos = produtos.listar_produtos()
     total = Vendas.query.all()
-    return render_template('index.html', clientes=clientes, vendas=vendas, produtos=produtos, total=total)
+    return render_template('index.html', 
+                            clientes=qtd_clientes, 
+                            vendas=qtd_vendas, 
+                            produtos=qtd_produtos, 
+                            total=1)
 
 
 if __name__ == '__main__':
+    import sys  
+
+    reload(sys)  
+    sys.setdefaultencoding('utf8')
+
     app.run(debug=True, host='0.0.0.0',port=8081)

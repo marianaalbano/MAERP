@@ -15,7 +15,7 @@
                             <a href="/clientes">
                                 <div class="r-icon-stats"> <i class="ti-user bg-megna"></i>
                                     <div class="bodystate">
-                                        <h4>{{ clientes }}</h4> <span class="text-muted">Clientes</span>
+                                        <h4>{{ clientes|count }}</h4> <span class="text-muted">Clientes</span>
                                     </div>
                                 </div>
                             </a>
@@ -26,7 +26,7 @@
                             <a href="/vendas">
                                 <div class="r-icon-stats"> <i class="ti-shopping-cart bg-info"></i>
                                     <div class="bodystate">
-                                        <h4>{{ vendas }}</h4> <span class="text-muted">Vendas</span>
+                                        <h4>{{ vendas|count }}</h4> <span class="text-muted">Vendas</span>
                                     </div>
                                 </div>
                             </a>
@@ -37,7 +37,7 @@
                             <a href="/produtos">
                                 <div class="r-icon-stats"> <i class="fa fa-cubes bg-success"></i>
                                     <div class="bodystate">
-                                        <h4>{{ produtos }}</h4> <span class="text-muted">Produtos</span>
+                                        <h4>{{ produtos|count }}</h4> <span class="text-muted">Produtos</span>
                                     </div>
                                 </div>
                             </a>
@@ -47,7 +47,7 @@
                         <div class="white-box">
                             <div class="r-icon-stats"> <i class="ti-wallet bg-inverse"></i>
                                 <div class="bodystate">
-                                    <h4>R$ {{ total|sum(attribute='total') }}</h4> <span class="text-muted">Total</span> </div>
+                                    <h4>R$ 1</h4> <span class="text-muted">Total</span> </div>
                             </div>
                         </div>
                     </div>

@@ -26,12 +26,12 @@
                                                 <br/></p>
                                         </address> </div>
                                     <div class="pull-right text-right"> <address>
-                                            <h4 class="font-bold">{{ vendas.clientes.nome }},</h4>
-                                            <p class="text-muted m-l-30">{{ vendas.clientes.endereco }}
-                                                <br/>{{ vendas.clientes.telefone }}
-                                                <br/> {{ vendas.clientes.email }}
+                                            <h4 class="font-bold">{{ vendas[0].cliente.nome }},</h4>
+                                            <p class="text-muted m-l-30">{{ vendas[0].cliente.endereco }}
+                                                <br/>{{ vendas[0].cliente.telefone }}
+                                                <br/> {{ vendas[0].cliente.email }}
                                                 <br/></p>
-                                            <p class="m-t-30"><b>Data</b> <i class="fa fa-calendar"></i> {{ vendas.data.strftime('%d/%m/%Y') }}</p>
+                                            <p class="m-t-30"><b>Data</b> <i class="fa fa-calendar"></i> {{ vendas[0].data.strftime('%d/%m/%Y') }}</p>
                                             </address> </div>
                                 </div>
                                 <div class="col-md-12">
@@ -41,17 +41,19 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Produto</th>
+                                                    <th>Valor Unitário</th>
                                                     <th>Quantidade</th>
-                                                    <th class="text-right">Valor</th>
+                                                    <th class="text-right">Valor Total</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% for p in vendas.produtos %}
+                                            {% for p in vendas %}
                                                 <tr>
-                                                    <td>{{ p.id }}</td>
-                                                    <td>{{ p.nome }} </td>
-                                                    <td>2</td>
-                                                    <td class="text-right">R$ {{ p.valor }} </td>
+                                                    <td>{{ p.produto.id }}</td>
+                                                    <td>{{ p.produto.nome }} </td>
+                                                    <td>R$ {{ p.produto.valor }} </td>
+                                                    <td>{{ p.quantidade }}</td>                                                    
+                                                    <td class="text-right">R$ {{ p.produto.valor * p.quantidade }}</td>
                                                 </tr>
                                             {% endfor %}
                                             </tbody>
@@ -60,7 +62,8 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="pull-right m-t-30 text-right">
-                                        <h3><b>Total:</b> {{ vendas.produtos|sum(attribute='valor') }}</h3> </div>
+                                        
+                                        <h3><b>Total:</b> {{ total }}</h3> </div>
                                     <div class="clearfix"></div>
                                     <hr>
                                     <div class="text-right">

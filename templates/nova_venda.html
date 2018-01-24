@@ -35,7 +35,7 @@
                         <div class="col-lg-4">
                                     <label>Data</label>
                                     <div class="input-group">
-                                        <input type="text" name="data" class="form-control mydatepicker" placeholder="dd/mm/yyyy"> <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                        <input type="text" name="data" id="data" class="form-control mydatepicker" placeholder="dd/mm/yyyy"> <span class="input-group-addon"><i class="icon-calender"></i></span>
                                     </div>
                         </div>
                         <div class="col-lg-1">
@@ -146,13 +146,12 @@
     </script>
 <script>
     $('#convert-table').click( function() {
-		var table = $('#demo-foo-addrow').tableToJSON(); // Convert the table into a javascript object
-		//console.log(table);
-		//alert(JSON.stringify(table));
+		var table = $('#demo-foo-addrow').tableToJSON();
+       // Convert the table into a javascript object
       
         var cliente_id = $("#cliente_id").val();
 		var cliente = $("#cliente").val();
-		var data = $("#data").val();
+		var dia = $("#data").val();
 
         var xhr = new XMLHttpRequest();
         var url = "/nova_venda/";
@@ -166,7 +165,7 @@
         };
         var data = JSON.stringify({'cliente_id':cliente_id,
                                    'cliente':cliente,
-                                   'data':data,
+                                   'data':dia,
                                    'produtos':table});
         xhr.send(data);
         });
