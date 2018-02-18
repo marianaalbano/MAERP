@@ -29,7 +29,11 @@
     }
 
     .invoice-box table tr td:nth-child(2){
-        text-align:right;
+        text-align:left;
+    }
+
+    .invoice-box table tr td:nth-child(3){
+        text-align:left;
     }
 
     .invoice-box table tr.top table td{
@@ -64,24 +68,49 @@
         border-bottom:none;
     }
 
-    .invoice-box table tr.total td:nth-child(2){
+    .invoice-box table tr.total td:nth-child(3){
         border-top:2px solid #eee;
         font-weight:bold;
+        text-align:left;
+
     }
 
-    @media only screen and (max-width: 600px) {
+    .invoice-box table tr.total td:nth-child(2){
+        font-weight:bold;
+        text-align:right;
+
+    }
+
+    @media only screen and (max-width: 1000px) {
         .invoice-box table tr.top table td{
             width:100%;
             display:block;
-            text-align:center;
+            text-align:right;
         }
 
         .invoice-box table tr.information table td{
             width:100%;
             display:block;
-            text-align:center;
+            text-align:right;
         }
     }
+
+    .invoice-box table tr.information td:nth-child(2){
+        text-align:right;
+
+    }
+
+    .invoice-box table tr.information td:nth-child(2){
+        text-align:right;
+
+    }
+
+    .invoice-box table tr.top table td:nth-child(2){
+        width:100%;
+        display:block;
+        text-align:right;
+    }
+
     </style>
 </head>
 
@@ -94,12 +123,12 @@
                         <tr>
                             <td class="title">
 
-                                <img src="/home/malbano/PycharmProjects/ERP/static/images/logo.png" border="0">
+                                <img src="/home/mari/Projetos/MAERP/static/images/logo.png" border="0">
                             </td>
 
                             <td>
-                                Nota #: {{ vendas.id }}<br>
-                                Data: {{ vendas.data.strftime('%d-%m-%Y') }}<br>
+                                Nota #: {{ vendas[0].id }}<br>
+                                Data: {{ vendas[0].data.strftime('%d-%m-%Y') }}<br>
                             </td>
                         </tr>
                     </table>
@@ -111,15 +140,15 @@
                     <table>
                         <tr>
                             <td>
-                                MAJJI, Inc.<br>
+                                MAERP, Inc.<br>
                                 mariana.albano@outlook.com<br>
                                 Av Paulista, São Paulo - SP
                             </td>
 
                             <td>
-                                {{ vendas.clientes.nome }}<br>
-                                {{ vendas.clientes.email }}<br>
-                                {{ vendas.clientes.endereco }}
+                                {{ vendas[0].clientes.nome }}<br>
+                                {{ vendas[0].clientes.email }}<br>
+                                {{ vendas[0].clientes.endereco }}
                             </td>
                         </tr>
                     </table>
@@ -130,32 +159,39 @@
 
             <tr class="heading">
                 <td>
-                    Produto
+                    QTD
                 </td>
 
                 <td>
-                    Valor
+                    PRODUTO
+                </td>
+                <td>
+                    VALOR
                 </td>
             </tr>
-            {% for p in vendas.produtos %}
+            {% for p in vendas %}
 
             <tr class="item">
                 <td>
-                    {{ p.nome }}
+                    {{ vendas[0].quantidade }}
+                </td>
+                <td>
+                    {{ p.produto.nome }}
                 </td>
 
 
                 <td>
-                    R$ {{p.valor }}
+                    R$ {{p.produto.valor }}
                 </td>
             </tr>
             {% endfor %}
 
             <tr class="total">
                 <td></td>
+                <td>Total: </td>
 
                 <td>
-                   Total: R$ {{ vendas.total }}
+                   R$ {{ total }}
                 </td>
             </tr>
         </table>

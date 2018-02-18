@@ -26,8 +26,11 @@ def cria_pdf():
         vendas = VendasClass()
         try:
             id = request.form.get('id')
-            info = vendas.filtrar_venda(id)
-            html = render_template('nota.html', vendas=info)
+            vendas = vendas.buscar_info(id)
+            total = 0
+            for venda in vendas:
+                total += venda.quantidade * venda.produto.valor
+            html = render_template('nota.html', vendas=vendas, total=total)
             pdf = from_string(html, False)
             header = {"Content-disposition": "attachment; filename=nota.pdf"}
             a = Response(pdf, mimetype="application/pdf", headers=header)

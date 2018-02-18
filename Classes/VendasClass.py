@@ -26,7 +26,10 @@ class VendasClass:
         try:
             #busca o ultimo ID
             venda_id = Vendas.query.order_by(Vendas.id.desc()).first()
-            venda_id = venda_id.id + 1
+            if venda_id:
+                venda_id = venda_id.id + 1
+            else:
+                venda_id = 1
 
             p = ProdutosClass()
             
