@@ -34,20 +34,14 @@ class VendasClass:
             p = ProdutosClass()
             
             for prod in info['produtos']:
-                print venda_id
-                print prod.get('quantidade')
                 del(info['produtos'][-1])
-                print info
                 v = Vendas()
                 if info.get('data'):
                     v.data = info.get('data')
 
-                    print v.data
-
                 #encontra o cliente
                 c = ClientesClass()
                 cliente = c.filtrar_cliente(info.get('cliente_id'))
-                print cliente.nome
                 cliente.vendas.append(v)
 
                 total = 0
@@ -56,20 +50,12 @@ class VendasClass:
                 v.quantidade = prod.get('quantidade')
                 total += int(prod.get('total'))
                 produto.vendas.append(v)
-                print produto.nome
 
-                print total
-
+                #adiciona
                 v.total = total
                 v.id_venda = venda_id
                 db.session.add(v)
                 db.session.commit()
 
         except Exception as e:
-            print 'erro: %s' %e
-
-
-
-if __name__ == '__main__':
-    v = VendasClass()
-    v.adicionar_venda(data='15/03/1995', cliente='1', produto_id='1')
+            return 'Erro: %s' %e

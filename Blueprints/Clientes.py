@@ -25,7 +25,6 @@ def novo_cliente():
             flash('Cliente adicionado com sucesso!', 'success')
             return redirect(url_for('.lista_clientes'))
         except Exception as e:
-
             flash('Falha ao inserir: %s' %e, 'danger')
             return redirect(url_for('.lista_clientes'))
     else:

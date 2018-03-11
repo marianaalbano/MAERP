@@ -37,7 +37,7 @@
                                                 <input type="email" class="form-control" name="email" value="{{ cliente.email }}"></div>
                                         </div>
                                         <button type="submit" formaction="/editar_cliente/{{ cliente.id }}/" class="btn btn-success waves-effect waves-light m-r-10">Editar</button>
-                                        {% if cliente.ativo|int() == 1 %}
+                                        {% if cliente.ativo == 'true' %}
                                         <button type="submit" formaction="/desativar_cliente/{{ cliente.id }}/" class="btn btn-info waves-effect waves-light m-r-10">Desativar</button>
                                         {% else %}
                                         <button type="submit" formaction="/ativar_cliente/{{ cliente.id }}/" class="btn btn-info waves-effect waves-light m-r-10">Ativar</button>

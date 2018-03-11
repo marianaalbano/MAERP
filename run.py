@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_login import LoginManager, login_required, login_user, logout_user
 from Model.Model import Clientes, Vendas, Produtos, db, app
 from Blueprints.Vendas import vendas
@@ -52,7 +52,8 @@ def login():
             login_user(usuario, remember=False)
             return redirect(url_for('index'))
         else:
-            return 'xxx'
+            flash('Usuario e/ou senha incorretos', 'danger')
+            return redirect(url_for('login'))
     else:
 
         return render_template('login.html')
@@ -84,12 +85,12 @@ def index():
 
     produtos = ProdutosClass()
     qtd_produtos = produtos.listar_produtos()
-    total = Vendas.query.all()
+    total = 0
     return render_template('index.html', 
                             clientes=qtd_clientes, 
                             vendas=qtd_vendas, 
                             produtos=qtd_produtos, 
-                            total=1)
+                            total=total)
 
 
 if __name__ == '__main__':

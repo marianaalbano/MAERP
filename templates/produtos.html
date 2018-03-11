@@ -55,7 +55,7 @@
                                             </thead>
                                             <tbody>
                                             {% for p in produtos %}
-                                            {% if p.ativo|int() == 1 %}
+                                            {% if p.ativo == 'true' %}
                                                 <tr>
                                                     <td>{{ p.id }}</td>
                                                     <td>{{ p.nome }}</td>
@@ -84,7 +84,7 @@
                                             </thead>
                                             <tbody>
                                             {% for p in produtos %}
-                                            {% if p.ativo|int() == 0 %}
+                                            {% if p.ativo == 'false' %}
                                                 <tr>
                                                     <td>{{ p.id }}</td>
                                                     <td>{{ p.nome }}</td>

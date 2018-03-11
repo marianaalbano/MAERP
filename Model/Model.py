@@ -6,10 +6,18 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
 from datetime import datetime
+import os
+
+POSTGRES_USER = os.environ["POSTGRES_USER"]
+POSTGRES_PW = os.environ["POSTGRES_PW"]
+POSTGRES_URL = os.environ["POSTGRES_URL"]
+POSTGRES_DB = os.environ["POSTGRES_DB"]
+
+DB_URL = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=POSTGRES_USER,pw=POSTGRES_PW,url=POSTGRES_URL,db=POSTGRES_DB)
 
 
 app = Flask(__name__,static_folder='../static', template_folder='../templates')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../banco.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app, session_options={"autoflush": False})
 
@@ -80,15 +88,3 @@ class Vendas(db.Model):
 
 if __name__ == '__main__':
     manager.run()
-    # cliente = Clientes.query.get(1)
-    # produtos = Produtos.query.get(1)   
-    # print cliente.nome
-    # print produtos.nome
-    # vendas = Vendas()
-    # vendas.total = 5
-    # vendas.quantidade = 5
-    # vendas.id_venda = 1
-    # cliente.vendas.append(vendas)
-    # produtos.vendas.append(vendas)
-    # db.session.add(vendas)
-    # db.session.commit()

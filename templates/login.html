@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=1,initial-scale=1,user-scalable=1" />
 	<link rel="icon" type="image/png" sizes="16x16" href="/static/plugins/images/logo.png">
-	<title>FERGON</title>
+	<title>MAERP</title>
 	
 	<link href="http://fonts.googleapis.com/css?family=Lato:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css" />
@@ -20,6 +20,7 @@
 
 	<section class="container">
 			<section class="login-form">
+					{% include 'alert.html' %}
 				<form method="post" action="" role="login">
 					<img src="/static/plugins/images/logo.png" class="img-responsive" alt="" />
 					<input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
